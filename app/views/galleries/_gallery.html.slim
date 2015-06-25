@@ -1,0 +1,14 @@
+tr
+  td
+    p = gallery.updated_at
+    h3 = link_to gallery.name, gallery_path(gallery)
+  td 
+    p = gallery.user.email
+  - if current_user and gallery.user == current_user
+    td
+      = link_to 'Редактировать', edit_gallery_path(gallery), class: 'btn btn-warning'
+    td
+      = link_to 'Удалить', gallery_path(gallery), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Вы уверены?')) }, :class => 'btn btn-danger'
+  - else
+    td[colspan='2']
+      = link_to 'Смотреть', gallery_path(gallery), class: 'btn btn-success'

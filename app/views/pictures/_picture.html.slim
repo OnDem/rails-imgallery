@@ -1,0 +1,10 @@
+tr
+  td
+    = picture.name
+  td
+    = image_tag picture.picfile.url(:medium), :class => 'img-rounded'
+  - if current_user and @gallery.user == current_user
+    td
+      = link_to 'Редактировать', edit_gallery_path(@gallery), class: 'btn btn-warning'
+    td
+      = link_to 'Удалить', picture_path(picture), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Вы уверены?')) }, :class => 'btn btn-danger'

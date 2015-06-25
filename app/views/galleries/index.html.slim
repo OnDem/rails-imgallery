@@ -1,0 +1,16 @@
+.panel.panel-default
+  .panel-heading
+    h1 Галереи
+    - if current_user
+      .path-selector
+        = link_to 'Добавить галерею', new_gallery_path, class: 'btn btn-success'
+  .panel-body
+    table.table
+      thead
+        th Название
+        th Автор
+        - if current_user
+          th[colspan='2'] Действия
+      tbody
+        = render @galleries
+        

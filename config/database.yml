@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: ror
+  password: rorx
+  port: 5439
+  pool: 5
+
+development:
+  <<: *default
+  database: imgallery_development
+
+test:
+  <<: *default
+  database: imgallery_test
+

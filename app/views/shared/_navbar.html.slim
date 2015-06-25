@@ -1,0 +1,22 @@
+.navbar.navbar-default[role='navigation']  
+  .container
+    .navbar-header
+      = link_to 'Делюсь картинками','/', class: 'navbar-brand'
+    = menu_group do
+      = menu_item "Галереи", galleries_path
+      - if current_user
+        = menu_item "Мои галереи", mygalleries_galleries_path
+        = menu_item "Новая галерея", new_gallery_path
+    - if current_user
+      = menu_group :pull => :right do
+        = drop_down current_user.try(:email) do
+          = menu_item "Мои галереи", mygalleries_galleries_path
+          = menu_item "Новая галерея", new_gallery_path
+          .divider
+          = menu_item "Выйти", destroy_user_session_path, method: :delete
+    - else
+      = menu_group :pull => :right do
+        = menu_item "Регистрация", new_user_registration_path
+        = menu_item "Войти", new_user_session_path
+
+

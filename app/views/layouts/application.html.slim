@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title
+      | Image Gallery
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  body
+    = render 'shared/navbar'
+    .container
+      - unless notice.blank?
+        #notice
+          = notice
+      - unless alert.blank?
+        #alert
+          = alert
+      = yield

@@ -1,0 +1,38 @@
+=form_for @gallery, class: 'form-inline' do |f|
+  .panel.panel-default
+    .panel-heading
+      h4  Свойства
+    .panel-body
+      table.table
+       tr
+         td
+           = f.label 'Название'
+         td[colspan='2']
+           .input-group
+             = f.text_field :name, size: 24, maxlength: 20, placeholder: 'Как я провел лето...', class: 'form-control'
+       tr
+         td
+           = f.label 'Мои фото'
+         td
+           .input-group
+             = f.fields_for :pictures do |i|
+               - if i.object.persisted?
+                 .img-gal-item.pull-right
+                   p = i.object.name
+                   = image_tag i.object.picfile(:thumb), :class => 'img-rounded'
+                   br
+                   = link_to 'Удалить', picture_path(i.object), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Вы уверены?')) }, :class => 'btn btn-danger'
+               - else
+                 .pull-right
+                   .duplicatable_nested_form
+                     .row
+                       .col-md-6
+                         = i.text_field :name, placeholder: 'Название картинки'
+                       .col-md-6
+                         .file_browse_wrapper
+                           = i.file_field :picfile
+         td
+           = link_to 'Добавить еще одну картинку', '#', class: 'duplicate_nested_form add-file btn btn-warning'
+       tr
+         td
+           = f.submit 'Загрузить', class: 'btn btn-success'
